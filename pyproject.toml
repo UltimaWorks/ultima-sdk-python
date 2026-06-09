@@ -24,6 +24,9 @@ classifiers = [
 
 dependencies = ["pillow>=10.0.0"]
 
+[project.optional-dependencies]
+perf = ["numpy>=1.23"]
+
 [project.urls]
 Homepage = "https://github.com/UltimaWorks/ultima-sdk-python"
 
