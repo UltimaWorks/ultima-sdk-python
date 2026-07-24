@@ -43,22 +43,18 @@ class GumpImage(NamedTuple):
     height: int
 
     def to_image(self):
-        """Convert pixel data to a PIL Image (RGBA)."""
-        from PIL import Image
-        img = Image.new("RGBA", (self.width, self.height))
-        pix = img.load()
-        for y in range(self.height):
-            for x in range(self.width):
-                offset = (y * self.width + x) * 2
-                if offset + 2 > len(self.pixels):
-                    continue
-                (color,) = struct.unpack_from("<H", self.pixels, offset)
-                if color:
-                    r = ((color >> 10) & 0x1F) << 3
-                    g = ((color >> 5) & 0x1F) << 3
-                    b = (color & 0x1F) << 3
-                    pix[x, y] = (r, g, b, 255)
-        return img
+        """Convert pixel data to a PIL Image (RGBA).
+
+        The per-pixel work is delegated to
+        :func:`_pixel_convert.image_from_uo_pixels`, which uses a NumPy
+        lookup table when NumPy is available and falls back to a
+        Pillow-only loop otherwise. See
+        ``ultima_sdk/_pixel_convert.py`` for the conversion contract.
+        """
+        from ._pixel_convert import image_from_uo_pixels
+
+        return image_from_uo_pixels(self.width, self.height, self.pixels)
+
 
 
 class Gumps:
