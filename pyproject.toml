@@ -26,6 +26,9 @@ dependencies = ["pillow>=10.0.0"]
 
 [project.optional-dependencies]
 perf = ["numpy>=1.23"]
+[project.scripts]
+ultima-cliloc = "ultima_sdk.cliloc_cli:main"
+ultima-tiledata = "ultima_sdk.tiledata_cli:main"
 
 [project.urls]
 Homepage = "https://github.com/UltimaWorks/ultima-sdk-python"
