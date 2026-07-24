@@ -33,6 +33,8 @@ _EXPORTS = [
     ("ultima_sdk.exceptions",     "FileAccessException"),
     ("ultima_sdk.exceptions",     "FileParseError"),
     ("ultima_sdk.binary_extensions", "BinaryReader"),
+    ("ultima_sdk.cliloc",            "Cliloc"),
+    ("ultima_sdk.cliloc",            "ClilocEntry"),
 ]
 
 _exported: list[str] = []
